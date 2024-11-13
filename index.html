@@ -89,12 +89,15 @@
       background-color: #27ae60;
     }
 
-    /* Video Embed */
-    video {
+    /* GIF Embed */
+    .gif-container {
+      margin-top: 20px;
+    }
+
+    .gif-container img {
       width: 100%;
       max-width: 600px;
       border-radius: 10px;
-      margin-top: 20px;
     }
   </style>
 </head>
@@ -127,11 +130,10 @@
       <button class="share-btn" id="shareButton">Share</button>
       <p class="like-count" id="shareStatus"></p>
 
-      <!-- WebM Video Embed -->
-      <video controls id="webmVideo">
-        <source src="assets/images/merch.webm" type="video/webm">
-        Your browser does not support the video tag.
-      </video>
+      <!-- GIF Embed -->
+      <div class="gif-container">
+        <img src="assets/images/shirt.gif" alt="Music Animation">
+      </div>
 
     </div>
   </div>
@@ -153,7 +155,6 @@
       const likeCount = document.getElementById('likeCount');
       const shareButton = document.getElementById('shareButton');
       const shareStatus = document.getElementById('shareStatus');
-      const webmVideo = document.getElementById('webmVideo');
 
       // Initialize the like count from localStorage
       let likes = parseInt(localStorage.getItem('likeCount')) || 0;

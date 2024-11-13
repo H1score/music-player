@@ -202,7 +202,10 @@
       const runningTimeLabel = document.querySelector('[data-running-time]');
       const likeButton = document.getElementById('likeButton');
       const likeCount = document.getElementById('likeCount');
-      let likes = 0;
+      
+      // Get the like count from localStorage or default to 0
+      let likes = parseInt(localStorage.getItem('likeCount')) || 0;
+      likeCount.textContent = `${likes} Likes`;
 
       // Play / Pause Button Toggle
       playButton.addEventListener("click", () => {
@@ -220,36 +223,4 @@
       // Update the current time and seekbar
       audioPlayer.addEventListener('timeupdate', () => {
         const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-
-        // Update running time
-        const currentMinutes = Math.floor(currentTime / 60);
-        const currentSeconds = Math.floor(currentTime % 60);
-        runningTimeLabel.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' + currentSeconds : currentSeconds}`;
-
-        // Update duration
-        const durationMinutes = Math.floor(duration / 60);
-        const durationSeconds = Math.floor(duration % 60);
-        durationLabel.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}`;
-
-        // Update seekbar
-        const progress = (currentTime / duration) * 100;
-        rangeSeek.value = progress;
-      });
-
-      rangeSeek.addEventListener('input', (e) => {
-        const seekTime = (e.target.value / 100) * audioPlayer.duration;
-        audioPlayer.currentTime = seekTime;
-      });
-
-      // Like Button Logic
-      likeButton.addEventListener("click", () => {
-        likes++;
-        likeCount.textContent = `${likes} Likes`;
-      });
-    });
-  </script>
-
-</body>
-
-</html>
+        const

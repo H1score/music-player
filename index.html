@@ -34,11 +34,12 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      flex-direction: column;
     }
 
     .player {
       width: 100%;
-      max-width: 800px;
+      max-width: 600px; /* Smaller player width */
       background-color: white;
       border-radius: 10px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -97,6 +98,28 @@
 
     .player-control button:focus {
       outline: none;
+    }
+
+    .like-btn {
+      background-color: #3498db;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .like-btn:hover {
+      background-color: #2980b9;
+    }
+
+    .like-count {
+      font-size: 16px;
+      color: #555;
+      margin-top: 5px;
     }
 
     .overlay {
@@ -171,6 +194,10 @@
           <span class="material-symbols-rounded">shuffle</span>
         </button>
       </div>
+
+      <!-- Like Button and Counter -->
+      <button class="like-btn" id="likeButton">Like</button>
+      <p class="like-count" id="likeCount">0 Likes</p>
     </div>
   </div>
 
@@ -188,6 +215,9 @@
       const rangeSeek = document.querySelector('[data-seek]');
       const durationLabel = document.querySelector('[data-duration]');
       const runningTimeLabel = document.querySelector('[data-running-time]');
+      const likeButton = document.getElementById('likeButton');
+      const likeCount = document.getElementById('likeCount');
+      let likes = 0;
 
       // Play / Pause Button Toggle
       playButton.addEventListener("click", () => {
@@ -202,30 +232,5 @@
         }
       });
 
-      // Update range and time as audio plays
-      audioPlayer.addEventListener('timeupdate', () => {
-        const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-
-        const currentMinutes = Math.floor(currentTime / 60);
-        const currentSeconds = Math.floor(currentTime % 60);
-        runningTimeLabel.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' + currentSeconds : currentSeconds}`;
-
-        const durationMinutes = Math.floor(duration / 60);
-        const durationSeconds = Math.floor(duration % 60);
-        durationLabel.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}`;
-
-        rangeSeek.value = (currentTime / duration) * 100;
-      });
-
-      // Seek control functionality
-      rangeSeek.addEventListener('input', () => {
-        const seekTime = (rangeSeek.value / 100) * audioPlayer.duration;
-        audioPlayer.currentTime = seekTime;
-      });
-    });
-  </script>
-
-</body>
-
-</html>
+      // Like Button Click
+      like

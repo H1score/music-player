@@ -71,6 +71,31 @@
       color: #555;
       margin-top: 5px;
     }
+
+    /* Share Button */
+    .share-btn {
+      background-color: #2ecc71;
+      color: white;
+      font-size: 18px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+
+    .share-btn:hover {
+      background-color: #27ae60;
+    }
+
+    /* Video Embed */
+    video {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 
@@ -97,6 +122,17 @@
       <!-- Like Button and Counter -->
       <button class="like-btn" id="likeButton">Like</button>
       <p class="like-count" id="likeCount">0 Likes</p>
+
+      <!-- Share Button -->
+      <button class="share-btn" id="shareButton">Share</button>
+      <p class="like-count" id="shareStatus"></p>
+
+      <!-- WebM Video Embed -->
+      <video controls id="webmVideo">
+        <source src="assets/images/merch.webm" type="video/webm">
+        Your browser does not support the video tag.
+      </video>
+
     </div>
   </div>
 
@@ -115,6 +151,9 @@
       const audioPlayer = document.getElementById('audioPlayer');
       const likeButton = document.getElementById('likeButton');
       const likeCount = document.getElementById('likeCount');
+      const shareButton = document.getElementById('shareButton');
+      const shareStatus = document.getElementById('shareStatus');
+      const webmVideo = document.getElementById('webmVideo');
 
       // Initialize the like count from localStorage
       let likes = parseInt(localStorage.getItem('likeCount')) || 0;
@@ -156,8 +195,37 @@
         likeCount.textContent = `${likes} Likes`;
         localStorage.setItem('likeCount', likes);
       });
+
+      // Share button logic
+      shareButton.addEventListener("click", () => {
+        if (navigator.share) {
+          navigator.share({
+            title: 'Check out this music!',
+            text: 'Listen to Ghetto Haiku V1 by Dktr N9ne.',
+            url: window.location.href,
+          })
+          .then(() => {
+            shareStatus.textContent = "Shared successfully!";
+          })
+          .catch(error => {
+            console.error("Error sharing:", error);
+            shareStatus.textContent = "Sharing failed.";
+          });
+        } else {
+          // Fallback if the browser doesn't support the Web Share API
+          const shareLink = `Check out this music! Listen to Ghetto Haiku V1 by Dktr N9ne. ${window.location.href}`;
+          navigator.clipboard.writeText(shareLink)
+            .then(() => {
+              shareStatus.textContent = "Link copied to clipboard!";
+            })
+            .catch(err => {
+              shareStatus.textContent = "Failed to copy link.";
+            });
+        }
+      });
     });
   </script>
 
 </body>
+
 </html>

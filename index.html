@@ -223,4 +223,7 @@
       // Update the current time and seekbar
       audioPlayer.addEventListener('timeupdate', () => {
         const currentTime = audioPlayer.currentTime;
-        const
+        const duration = audioPlayer.duration;
+
+        // Update running time
+        const currentMinutes = Math.floor(currentTime / 60);

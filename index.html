@@ -223,4 +223,33 @@
         const duration = audioPlayer.duration;
 
         // Update running time
-        const current
+        const currentMinutes = Math.floor(currentTime / 60);
+        const currentSeconds = Math.floor(currentTime % 60);
+        runningTimeLabel.textContent = `${currentMinutes}:${currentSeconds < 10 ? '0' + currentSeconds : currentSeconds}`;
+
+        // Update duration
+        const durationMinutes = Math.floor(duration / 60);
+        const durationSeconds = Math.floor(duration % 60);
+        durationLabel.textContent = `${durationMinutes}:${durationSeconds < 10 ? '0' + durationSeconds : durationSeconds}`;
+
+        // Update seekbar
+        const progress = (currentTime / duration) * 100;
+        rangeSeek.value = progress;
+      });
+
+      rangeSeek.addEventListener('input', (e) => {
+        const seekTime = (e.target.value / 100) * audioPlayer.duration;
+        audioPlayer.currentTime = seekTime;
+      });
+
+      // Like Button Logic
+      likeButton.addEventListener("click", () => {
+        likes++;
+        likeCount.textContent = `${likes} Likes`;
+      });
+    });
+  </script>
+
+</body>
+
+</html>

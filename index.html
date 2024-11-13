@@ -168,7 +168,7 @@
         <button class="btn-icon" data-skip-prev>
           <span class="material-symbols-rounded">skip_previous</span>
         </button>
-        <button class="btn-icon play" data-play-btn>
+        <button class="btn-icon play" id="playButton" data-play-btn>
           <span class="material-symbols-rounded default-icon">play_arrow</span>
           <span class="material-symbols-rounded active-icon">pause</span>
         </button>
@@ -195,11 +195,8 @@
   <!-- Custom JS -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const playButton = document.querySelector('[data-play-btn]');
+      const playButton = document.getElementById('playButton');
       const audioPlayer = document.getElementById('audioPlayer');
-      const rangeSeek = document.querySelector('[data-seek]');
-      const durationLabel = document.querySelector('[data-duration]');
-      const runningTimeLabel = document.querySelector('[data-running-time]');
       const likeButton = document.getElementById('likeButton');
       const likeCount = document.getElementById('likeCount');
       
@@ -210,20 +207,17 @@
       // Play / Pause Button Toggle
       playButton.addEventListener("click", () => {
         if (audioPlayer.paused) {
-          audioPlayer.play();
+          audioPlayer.play();  // Play the music
           playButton.querySelector('.default-icon').style.display = 'none';
           playButton.querySelector('.active-icon').style.display = 'inline-block';
         } else {
-          audioPlayer.pause();
+          audioPlayer.pause();  // Pause the music
           playButton.querySelector('.default-icon').style.display = 'inline-block';
           playButton.querySelector('.active-icon').style.display = 'none';
         }
       });
 
-      // Update the current time and seekbar
-      audioPlayer.addEventListener('timeupdate', () => {
-        const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-
-        // Update running time
-        const currentMinutes = Math.floor(currentTime / 60);
+      // Like button logic
+      likeButton.addEventListener("click", () => {
+        likes += 1;
+        likeCount.textContent = `${likes}

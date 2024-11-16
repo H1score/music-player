@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Music Player</title>
 
-  <!-- Add Bootstrap CSS for the email sign-up form -->
+  <!-- Add Bootstrap CSS for general styling -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
   <style>
@@ -38,6 +38,7 @@
       width: 100%;
       height: auto;
       border-radius: 10px;
+      object-fit: cover;  /* Ensures image covers the area without distortion */
     }
 
     .music-content h2 {
@@ -103,32 +104,6 @@
       max-width: 600px;
       border-radius: 10px;
     }
-
-    /* Email Sign-Up Form Styling */
-    .form-signin {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-      margin-top: 40px;
-    }
-
-    .form-signin img {
-      width: 100px;
-      height: 100px;
-      margin-bottom: 20px;
-    }
-
-    .form-signin .form-control {
-      margin-bottom: 10px;
-    }
-
-    .form-signin .btn {
-      margin-top: 10px;
-    }
   </style>
 </head>
 
@@ -168,19 +143,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Email Sign-Up Form -->
-  <main class="form-signin">
-    <form action="/" class="form-signin" method="POST">
-      <img class="mb-4" src="assets/images/9.png" alt="lablogo" width="100" height="100">
-      <h1 class="h3 mb-3 fw-normal">E-Mail List</h1>
-      <input type="text" name="fName" class="form-control top" placeholder="First name" required autofocus>
-      <input type="text" name="lName" class="form-control middle" placeholder="Last name" required autofocus>
-      <input type="email" name="email" class="form-control bottom" placeholder="Email address" required autofocus>
-      <button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
-      <p class="mt-5 mb-3 text-muted">&copy; Library Labs</p>
-    </form>
-  </main>
 
   <!-- Audio Player -->
   <audio id="audioPlayer" preload="auto">
@@ -258,4 +220,19 @@
           });
         } else {
           // Fallback if the browser doesn't support the Web Share API
-          const shareLink = `Check out this music! Listen to Ghetto Haiku V1 by Dktr N9ne. ${window.location.href
+          const shareLink = `Check out this music! Listen to Ghetto Haiku V1 by Dktr N9ne. ${window.location.href}`;
+          navigator.clipboard.writeText(shareLink)
+            .then(() => {
+              shareStatus.textContent = "Link copied to clipboard!";
+            })
+            .catch(err => {
+              shareStatus.textContent = "Failed to copy link.";
+            });
+        }
+      });
+    });
+  </script>
+
+</body>
+
+</html>

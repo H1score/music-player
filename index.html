@@ -74,22 +74,17 @@
 
     /* Share Button */
     .share-btn {
-      background-color: #2ecc71;
-      color: white;
-      font-size: 18px;
-      padding: 10px 20px;
+      background-color: transparent;
       border: none;
-      border-radius: 5px;
       cursor: pointer;
       margin-top: 20px;
-      transition: background-color 0.3s;
     }
 
-    .share-btn:hover {
-      background-color: #27ae60;
+    .share-btn img {
+      width: 40px; /* Adjust the size of the GIF */
+      height: auto;
     }
 
-    /* GIF Embed */
     .gif-container {
       margin-top: 20px;
     }
@@ -126,8 +121,10 @@
       <button class="like-btn" id="likeButton">Like</button>
       <p class="like-count" id="likeCount">0 Likes</p>
 
-      <!-- Share Button -->
-      <button class="share-btn" id="shareButton">Share</button>
+      <!-- Share Button with GIF -->
+      <button class="share-btn" id="shareButton">
+        <img src="assets/images/giphy.gif" alt="Share">
+      </button>
       <p class="like-count" id="shareStatus"></p>
 
       <!-- GIF Embed -->
